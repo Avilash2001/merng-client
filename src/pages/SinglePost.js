@@ -22,6 +22,7 @@ function SinglePost(props) {
   const { user } = useContext(AuthContext);
   const postId = props.match.params.postId;
   const commentInputRef = useRef(null);
+  const [errors, setErrors] = useState(null);
 
   const [comment, setComment] = useState("");
   const { data } = useQuery(FETCH_POST, {
@@ -38,6 +39,9 @@ function SinglePost(props) {
     variables: {
       postId,
       body: comment,
+    },
+    onError(err) {
+      setErrors(err.graphQLErrors[0].message);
     },
   });
 
@@ -134,6 +138,16 @@ function SinglePost(props) {
                       </button>
                     </div>
                   </Form>
+                  {errors && (
+                    <div
+                      className="ui error message"
+                      style={{ marginBottom: 20 }}
+                    >
+                      <ul className="list">
+                        <li>{errors}</li>
+                      </ul>
+                    </div>
+                  )}
                 </Card.Content>
               </Card>
             )}

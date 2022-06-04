@@ -32,8 +32,6 @@ function PostForm() {
       values.body = "";
     },
     onError(err) {
-      // console.log(err.graphQLErrors);
-      // console.log(err.graphQLErrors[0].extensions);
       setErrors(err.graphQLErrors[0].message);
     },
   });
