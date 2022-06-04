@@ -32,7 +32,9 @@ function PostForm() {
       values.body = "";
     },
     onError(err) {
-      setErrors(err.graphQLErrors[0].extensions.exception.stacktrace[0]);
+      // console.log(err.graphQLErrors);
+      // console.log(err.graphQLErrors[0].extensions);
+      setErrors(err.graphQLErrors[0].message);
     },
   });
 
